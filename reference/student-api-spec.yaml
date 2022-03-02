@@ -14,6 +14,8 @@ info:
 servers:
   - url: 'http://localhost:3000'
     description: Developer server
+  - url: 'https://production-edu-platoform'
+    description: Production
 tags:
   - name: Студенты
     description: Операции со студентами
@@ -25,6 +27,11 @@ tags:
     externalDocs:
       description: Дополнительная информация о курсах
       url: 'https://netology.ru/docs/courses'
+  - name: Задачи
+    description: Операции над задачами
+    externalDocs:
+      description: Дополнительная информация о задачах
+      url: 'https://netology.ru/docs/todos'
 paths:
   '/students/{userId}':
     parameters:
@@ -70,6 +77,8 @@ paths:
                     message: Ничего нэма
       operationId: getStudentById
       description: получение данных о студенте по ID
+      security:
+        - jwt: []
     patch:
       summary: Обновление данных о студенте
       operationId: updateStudentById
@@ -141,3 +150,262 @@ paths:
       description: Добавление нового студента
       tags:
         - Студенты
+  /todos:
+    get:
+      summary: Получение списка всех задач
+      tags:
+        - Задачи
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../models/Todo.yaml
+      operationId: getTodos
+      description: Получение списка задач
+      security:
+        - jwt: []
+    post:
+      summary: Создание задачи
+      tags:
+        - Задачи
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Todo.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                required:
+                  - code
+                  - message
+              examples:
+                example-1:
+                  value:
+                    code: 400
+                    message: Bad request
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                required:
+                  - code
+              examples:
+                example-1:
+                  value:
+                    code: 401
+                    message: Не авторизованный пользователь
+      operationId: createTodo
+      description: Создание задачи
+      security:
+        - jwt: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/Todo.yaml
+  '/todos/{todoId}':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: todoId
+        in: path
+        required: true
+        description: ID задачи
+    get:
+      summary: Получение задачи по ID
+      description: Получение задачи по ID
+      tags:
+        - Задачи
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Todo.yaml
+              examples:
+                example-1:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    title: 'Тестовая задача #1'
+                    description: Описание тестовой задачи №1
+                    complete: true
+                    completed:
+                      id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      firstName: Наталия Шипелова
+                      lastName: string
+                      email: user@example.com
+                      phone: 987-987-22
+                      birthDay: '2019-08-24'
+                      skills:
+                        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                          title: HTML
+      operationId: getTodoByID
+      security:
+        - jwt: []
+    put:
+      summary: Заменить задачу
+      description: Заменить задачу по ID
+      tags:
+        - Задачи
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Todo.yaml
+              examples:
+                example-1:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    title: 'Тестовая задача #1'
+                    description: Описание тестовой задачи №1
+                    complete: true
+                    completed:
+                      id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      firstName: Наталия Шипелова
+                      lastName: string
+                      email: user@example.com
+                      phone: 987-987-22
+                      birthDay: '2019-08-24'
+                      skills:
+                        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                          title: HTML
+      operationId: replaceTodoById
+      security:
+        - jwt: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/Todo.yaml
+            examples:
+              example-1:
+                value:
+                  title: 'Тестовая задача #1'
+                  description: Описание тестовой задачи №1
+                  complete: true
+                  completed:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    firstName: Наталия Шипелова
+                    lastName: string
+                    email: user@example.com
+                    phone: 987-987-22
+                    birthDay: '2019-08-24'
+                    skills:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        title: HTML
+    patch:
+      summary: Обновить задачу
+      description: Обновить задачу по ID
+      tags:
+        - Задачи
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Todo.yaml
+              examples:
+                example-1:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    title: 'Тестовая задача #1'
+                    description: Описание тестовой задачи №1
+                    complete: true
+                    completed:
+                      id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      firstName: Наталия Шипелова
+                      lastName: string
+                      email: user@example.com
+                      phone: 987-987-22
+                      birthDay: '2019-08-24'
+                      skills:
+                        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                          title: HTML
+      operationId: updateTodoById
+      security:
+        - jwt: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/Todo.yaml
+            examples:
+              example-1:
+                value:
+                  title: 'Тестовая задача #1'
+                  description: Описание тестовой задачи №1
+                  complete: true
+                  completed:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    firstName: Наталия Шипелова
+                    lastName: string
+                    email: user@example.com
+                    phone: 987-987-22
+                    birthDay: '2019-08-24'
+                    skills:
+                      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        title: HTML
+    delete:
+      description: Удалить задачу по ID
+      summary: Удалить задачу
+      tags:
+        - Задачи
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Todo.yaml
+              examples:
+                example-1:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    title: 'Тестовая задача #1'
+                    description: Описание тестовой задачи №1
+                    complete: true
+                    completed:
+                      id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      firstName: Наталия Шипелова
+                      lastName: string
+                      email: user@example.com
+                      phone: 987-987-22
+                      birthDay: '2019-08-24'
+                      skills:
+                        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                          title: HTML
+      operationId: removeTodoById
+      security:
+        - jwt: []
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer

@@ -1,0 +1,46 @@
+title: Задача
+type: object
+x-tags:
+  - Задача
+description: Модель сушности Задача
+examples:
+  - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    title: 'Тестовая задача #1'
+    description: Описание тестовой задачи №1
+    complete: true
+    completed:
+      id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+      firstName: Наталия Шипелова
+      lastName: string
+      email: user@example.com
+      phone: 987-987-22
+      birthDay: '2019-08-24'
+      skills:
+        - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+          title: HTML
+  - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    title: Тестовая задача
+    description: Тестовое описание задачи
+    complete: false
+    completed: null
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Идентификатор задачи
+  title:
+    type: string
+    description: Заголовок задачи
+  description:
+    type: string
+    description: Описание задачи
+  complete:
+    type: boolean
+    default: false
+    description: Выполнена или нет задача
+  completed:
+    oneOf:
+      - type: 'null'
+      - $ref: ./Student.yaml
+required:
+  - title
