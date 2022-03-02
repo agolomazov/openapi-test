@@ -1,0 +1,21 @@
+title: HttpError
+type: object
+properties:
+  code:
+    type: integer
+    enum:
+      - 400
+      - 401
+      - 403
+      - 404
+      - 405
+      - 409
+      - 422
+    minimum: 400
+    description: HTTP-код ошибки
+  message:
+    type: string
+    description: Текст ошибки
+required:
+  - code
+description: HTTP-ошибки
