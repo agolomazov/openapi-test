@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "lint": "spectral lint ./reference/student-api-spec.yaml"
+    "lint": "spectral lint ./reference/student-api-spec.yaml --ruleset .spectral.yaml"
   },
   "repository": {
     "type": "git",
