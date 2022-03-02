@@ -14,6 +14,8 @@ info:
 servers:
   - url: 'http://localhost:3000'
     description: Developer server
+  - url: 'https://production-edu-platoform'
+    description: Production
 tags:
   - name: Студенты
     description: Операции со студентами
@@ -70,6 +72,8 @@ paths:
                     message: Ничего нэма
       operationId: getStudentById
       description: получение данных о студенте по ID
+      security:
+        - jwt: []
     patch:
       summary: Обновление данных о студенте
       operationId: updateStudentById
@@ -141,3 +145,8 @@ paths:
       description: Добавление нового студента
       tags:
         - Студенты
+components:
+  securitySchemes:
+    jwt:
+      type: http
+      scheme: bearer
