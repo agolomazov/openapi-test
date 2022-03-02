@@ -16,6 +16,11 @@ properties:
     type: boolean
     default: false
     description: Разблокирована
+  createAt:
+    type: string
+    format: date
+    description: Дата добавления гранулы
 required:
   - title
   - enabled
+  - createAt
