@@ -19,6 +19,9 @@ properties:
     type: string
     format: date
     description: Дата добавления гранулы
+  type:
+    type: string
+    description: Тип гранулы
 required:
   - title
   - enabled
