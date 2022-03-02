@@ -17,21 +17,18 @@ servers:
   - url: 'https://production-edu-platoform'
     description: Production
 tags:
-  - name: Студенты
-    description: Операции со студентами
-    externalDocs:
-      description: Дополнительная информация о студентах
-      url: 'https://netology.ru/docs/students'
-  - name: Курсы
-    description: Операции с конкретным курсом
-    externalDocs:
-      description: Дополнительная информация о курсах
-      url: 'https://netology.ru/docs/courses'
   - name: Задачи
-    description: Операции над задачами
+    description: Таски в системе
     externalDocs:
-      description: Дополнительная информация о задачах
-      url: 'https://netology.ru/docs/todos'
+      url: https://netology.ru/docs/tasks
+  - name: Курсы
+    description: Курсы в системе
+    externalDocs:
+      url: https://netology.ru/docs/courses
+  - name: Студенты
+    description: Студенты
+    externalDocs:
+      url: https://netology.ru/docs/courses
 paths:
   '/students/{userId}':
     parameters:
@@ -250,7 +247,6 @@ paths:
         name: todoId
         in: path
         required: true
-        description: ID задачи
     get:
       summary: Получение задачи по ID
       description: Получение задачи по ID

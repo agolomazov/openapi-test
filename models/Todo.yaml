@@ -18,5 +18,7 @@ properties:
     type: boolean
     default: false
     description: Выполнена или нет задача
+  completed:
+    $ref: ./Student.yaml
 required:
   - title
