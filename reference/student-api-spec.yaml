@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: student-api-spec
+  title: API LMS Test
   version: '1.0'
   description: Тестовое АПИ для работы со студентами
   contact:
@@ -29,6 +29,9 @@ tags:
     description: Студенты
     externalDocs:
       url: 'https://netology.ru/docs/courses'
+externalDocs:
+  description: Полная документация по Домену
+  url: 'http://netology.ru/docs/api'
 paths:
   '/students/{userId}':
     parameters:
