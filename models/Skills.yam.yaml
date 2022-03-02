@@ -1,0 +1,15 @@
+title: Скилл пользователя
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+  title:
+    type: string
+    description: Название скилла
+required:
+  - title
+description: Модель описывает скиллы пользователя
+examples:
+  - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    title: HTML

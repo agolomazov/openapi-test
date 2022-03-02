@@ -1,0 +1,143 @@
+openapi: 3.0.0
+info:
+  title: student-api-spec
+  version: '1.0'
+  description: Тестовое АПИ для работы со студентами
+  contact:
+    name: Natalya Shipelova
+    url: 'https://vk.com/natal-shipelova'
+    email: nata@netology.ru
+  termsOfService: 'http://terms'
+  license:
+    name: MIT
+    url: 'http://mit.com'
+servers:
+  - url: 'http://localhost:3000'
+    description: Developer server
+tags:
+  - name: Студенты
+    description: Операции со студентами
+    externalDocs:
+      description: Дополнительная информация о студентах
+      url: 'https://netology.ru/docs/students'
+  - name: Курсы
+    description: Операции с конкретным курсом
+    externalDocs:
+      description: Дополнительная информация о курсах
+      url: 'https://netology.ru/docs/courses'
+paths:
+  '/students/{userId}':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+        name: userId
+        in: path
+        required: true
+        description: ID студента
+    get:
+      summary: Получение студента по ID
+      tags:
+        - Студенты
+      responses:
+        '200':
+          description: Пользователь найден
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Student.yaml
+              examples: {}
+        '404':
+          description: Студент не найден
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Код ошибки
+                  message:
+                    type: string
+                    description: Текст ошибки
+                required:
+                  - code
+                  - message
+              examples:
+                404NotFound:
+                  value:
+                    code: 404
+                    message: Ничего нэма
+      operationId: getStudentById
+      description: получение данных о студенте по ID
+    patch:
+      summary: Обновление данных о студенте
+      operationId: updateStudentById
+      responses:
+        '200':
+          description: Обновление пользователя
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Student.yaml
+              examples:
+                example-1:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    firstName: Наталия
+                    lastName: Шипелова
+                    email: nata@example.com
+                    phone: 987-987-22
+                    birthDay: '1990-08-25'
+      description: Обновление информации о пользователе
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/Student.yaml
+            examples:
+              example-1:
+                value:
+                  id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                  firstName: Наталия
+                  lastName: Шипелова
+                  email: nata@example.com
+                  phone: 987-987-22
+                  birthDay: '1990-08-25'
+        description: Обновление данных о пользователе
+      tags:
+        - Студенты
+  /user:
+    post:
+      summary: Добавление нового пользователя
+      operationId: createStudent
+      responses:
+        '200':
+          description: Студент создан
+          content:
+            application/json:
+              schema:
+                $ref: ../models/Student.yaml
+              examples:
+                example-1:
+                  value:
+                    id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                    firstName: Наталия
+                    lastName: Шипелова
+                    email: nata@example.com
+                    phone: 987-987-22
+                    birthDay: '1990-08-25'
+        '400':
+          description: Missing Required Information
+        '409':
+          description: Email Already Taken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/Student.yaml
+            examples: {}
+        description: Добавление новой сущности Студента
+      description: Добавление нового студента
+      tags:
+        - Студенты

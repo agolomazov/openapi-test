@@ -1,0 +1,48 @@
+title: Студенты
+type: object
+x-tags:
+  - Студенты
+description: Данная модель описывает сущность Студента в системе
+examples:
+  - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    firstName: Наталия Шипелова
+    lastName: string
+    email: user@example.com
+    phone: 987-987-22
+    birthDay: '2019-08-24'
+    skills:
+      - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+        title: HTML
+properties:
+  id:
+    type: string
+    format: uuid
+  firstName:
+    type: string
+    example: Наталия Шипелова
+    description: Имя пользователя
+  lastName:
+    type: string
+    description: Фамилия пользователя
+  email:
+    type: string
+    description: email пользователя
+    format: email
+  phone:
+    type: string
+    pattern: '^\d{3}\-\d{3}-\d{2}$'
+    example: 987-987-22
+    description: Телефончик
+  birthDay:
+    type: string
+    format: date
+    description: Дршечка
+  skills:
+    type: array
+    uniqueItems: true
+    items:
+      $ref: ./Skills.yam.yaml
+required:
+  - firstName
+  - lastName
+  - email
