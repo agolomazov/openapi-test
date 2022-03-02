@@ -164,6 +164,23 @@ paths:
                 type: array
                 items:
                   $ref: ../models/Todo.yaml
+              examples:
+                example-1:
+                  value:
+                    - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                      title: Тестовая задача №1
+                      description: Описание тестовой задачи №1
+                      complete: false
+                      completed:
+                        id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                        firstName: Наталия Шипелова
+                        lastName: string
+                        email: user@example.com
+                        phone: 987-987-22
+                        birthDay: '2019-08-24'
+                        skills:
+                          - id: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+                            title: React
       operationId: getTodos
       description: Получение списка задач
       security:

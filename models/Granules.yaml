@@ -1,7 +1,6 @@
 title: Гранулы
 type: object
 description: Модель гранулы курса
-examples: []
 properties:
   id:
     type: string
